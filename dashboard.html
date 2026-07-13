@@ -85,11 +85,18 @@
     </div>
 
     <script>
+        // 1. BFcache / Back-Button Security Guard
+        // This fires every single time the page is shown, even when coming back via the back/forward buttons
+        window.addEventListener('pageshow', function (event) {
+            const token = localStorage.getItem('surfer_token');
+            if (!token) {
+                console.warn("No token detected on page show. Enforcing redirect...");
+                // Use replace() so the login page overrides this history state
+                window.location.replace(window.location.origin + '/login.html');
+            }
+        });
+
         const token = localStorage.getItem('surfer_token');
-        if (!token) {
-            console.warn("No token detected, redirecting back to login.html");
-            window.location.href = window.location.origin + '/login.html';
-        }
 
         async function loadDashboard() {
             try {
@@ -116,13 +123,18 @@
             window.location.href = window.location.origin + '/game.html';
         }
 
+        // 2. FIXED LOGOUT: Uses replace() instead of href
         function logout(event) {
             if (event) event.preventDefault();
             localStorage.clear();
-            window.location.href = window.location.origin + '/login.html';
+            console.log("Session cleared. Redirecting...");
+            window.location.replace(window.location.origin + '/login.html');
         }
 
-        loadDashboard();
+        // Run the initial check on load
+        if (token) {
+            loadDashboard();
+        }
     </script>
 </body>
 </html>
