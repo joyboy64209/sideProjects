@@ -80,20 +80,24 @@
         <h2 id="username-display">Loading...</h2>
         <div class="rank">Subway Legend</div>
 
+        <div class="stats-grid">
+            <div class="stat-box">
+                <span>Personal High Score</span>
+                <div id="highscore-display">0</div>
+            </div>
+        </div>
         
         <button type="button" onclick="launchGame(event)" class="action-btn">Launch Game</button>
         <a href="#" onclick="logout(event)" class="logout-link">Log Out Account</a>
     </div>
 
     <script>
-        // Protect Route: Ensure token exists
         const token = localStorage.getItem('surfer_token');
         if (!token) {
             console.warn("No token detected, redirecting back to login.html");
-            window.location.href = '/login.html';
+            window.location.href = window.location.origin + '/login.html';
         }
 
-        // Load metrics on initialization
         async function loadDashboard() {
             try {
                 const response = await fetch('/api/user/profile', {
@@ -113,17 +117,16 @@
             }
         }
 
-        // FIXED: Added event arg, preventDefault and absolute route path redirection
         function launchGame(event) {
             if (event) event.preventDefault();
             console.log("Redirecting to game.html...");
-            window.location.href = '/game.html';
+            window.location.href = window.location.origin + '/game.html';
         }
 
         function logout(event) {
             if (event) event.preventDefault();
             localStorage.clear();
-            window.location.href = '/login.html';
+            window.location.href = window.location.origin + '/login.html';
         }
 
         loadDashboard();

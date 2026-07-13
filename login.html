@@ -56,7 +56,6 @@
             transition: background-color 0.4s ease;
         }
 
-        /* Ambient Blobs matching your Navbar design */
         .ambient-blob {
             position: absolute;
             border-radius: 50%;
@@ -67,10 +66,9 @@
             transition: background 0.8s ease;
         }
 
-        .blob-1 { width: 45vw; h: 45vw; top: -10%; left: -10%; background: var(--blob-1); }
-        .blob-2 { width: 40vw; h: 40vw; bottom: -10%; right: -10%; background: var(--blob-2); }
+        .blob-1 { width: 45vw; height: 45vw; top: -10%; left: -10%; background: var(--blob-1); }
+        .blob-2 { width: 40vw; height: 40vw; bottom: -10%; right: -10%; background: var(--blob-2); }
 
-        /* Liquid/Frosted Glass container layout rules */
         .liquid-card {
             position: relative;
             z-index: 10;
@@ -120,7 +118,7 @@
         .input-wrapper input {
             width: 100%;
             padding: 12px 16px;
-            padding-right: 46px; /* Space for the visibility toggle */
+            padding-right: 46px; 
             background: var(--input-bg);
             border: 1px solid var(--input-border);
             border-radius: 12px;
@@ -136,7 +134,6 @@
             outline: none;
         }
 
-        /* Password eye icon layout styling toggle */
         .visibility-toggle {
             position: absolute;
             right: 14px;
@@ -187,7 +184,6 @@
             display: none;
         }
 
-        /* Top Right Theme Toggle alignment matching style specs */
         .theme-toggle-container {
             position: absolute;
             top: 20px;
@@ -257,20 +253,54 @@
     </div>
 
     <script>
+        async function handleLogin(event) {
+            event.preventDefault();
+            console.log("Form submission triggered!");
+            
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            const errorDiv = document.getElementById('error-message');
+
+            try {
+                console.log("Sending authentication request...");
+                const response = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+                
+                const data = await response.json();
+
+                if (response.ok) {
+                    console.log("Login successful! Token saved.");
+                    localStorage.setItem('surfer_token', data.token);
+                    
+                    // Direct absolute routing to bypass base href caching issues
+                    window.location.href = window.location.origin + '/dashboard.html'; 
+                } else {
+                    console.warn("Authentication failed:", data.error);
+                    errorDiv.textContent = data.error || "Authentication failed.";
+                    errorDiv.style.display = 'block';
+                }
+            } catch (err) {
+                console.error("Network/Server Error:", err);
+                errorDiv.textContent = "Server down or unreachable.";
+                errorDiv.style.display = 'block';
+            }
+        }
+
         function togglePasswordVisibility() {
             const passwordInput = document.getElementById('password');
             const eyeIcon = document.getElementById('eye-icon');
             
             if (passwordInput.type === 'password') {
                 passwordInput.type = 'text';
-                // Show Slash Eye template state context
                 eyeIcon.innerHTML = `
                     <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
                     <line x1="1" y1="1" x2="23" y2="23"></line>
                 `;
             } else {
                 passwordInput.type = 'password';
-                // Reset to standard looking eye layout frame
                 eyeIcon.innerHTML = `
                     <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
                     <circle cx="12" cy="12" r="3"></circle>
@@ -301,31 +331,6 @@
                 themeIcon.innerHTML = `<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>`;
             }
         }
-
-       // Replace the old handleLogin block in login.html with this code:
-async function handleLogin(event) {
-    event.preventDefault();
-    const username = document.getElementById('username').value.trim();
-    const password = document.getElementById('password').value;
-    const errorDiv = document.getElementById('error-message');
-
-    try {
-        const response = await fetch('/api/auth/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username, password })
-        });
-        const data = await response.json();
-
-        if (response.ok) {
-            localStorage.setItem('surfer_token', data.token);
-            window.location.href = 'dashboard.html'; // Redirect to the intermediate page
-        } else {
-            errorDiv.textContent = data.error || "Authentication failed.";
-            errorDiv.style.display = 'block';
-        }
-    } catch (err) {
-        errorDiv.textContent = "Server down or unreachable.";
-        errorDiv.style.display = 'block';
-    }
-}
+    </script>
+</body>
+</html>

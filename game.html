@@ -28,7 +28,6 @@
             overflow: hidden;
         }
 
-        /* Fixed Top Navbar Bar */
         .game-control-header {
             position: fixed !important;
             top: 0; left: 0;
@@ -39,7 +38,7 @@
             border-bottom: 1px solid var(--glass-border);
             display: flex; align-items: center; justify-content: space-between;
             padding: 0 24px; box-sizing: border-box;
-            z-index: 999999 !important; /* Remain above game elements */
+            z-index: 999999 !important; 
             color: var(--text-color);
         }
 
@@ -60,10 +59,6 @@
             background: var(--btn-bg); border-color: transparent; transform: translateY(-1px);
         }
 
-        /* CRITICAL FIX FOR THE WINDOW FRAME:
-           Forces ANY canvas, unity container, or wrapper injected by master-loader.js 
-           to display precisely 60px down from the top and span the rest of the page.
-        */
         canvas, #unityContainer, #unity-container, .unity-desktop, #webgl-content, #game-container-frame {
             position: fixed !important;
             top: 60px !important;
@@ -184,8 +179,6 @@
             window.location.href = localHost + '/dashboard.html';
         }
 
-        // CRITICAL FIX FOR SCORE TRACKING:
-        // Automatically scans all local storage data parameters to extract the score metrics
         let maximumHighRegisteredScore = 0;
 
         function syncScoreWithDatabase(score) {
@@ -207,17 +200,14 @@
             .catch(err => console.error("Database sync error:", err));
         }
 
-        // Run full database scanner loop engine context every 2 seconds
         setInterval(() => {
             try {
                 let highestDiscoveredValue = 0;
 
-                // Loop through all items in localStorage to catch any matching game data keys
                 for (let i = 0; i < localStorage.length; i++) {
                     const keyName = localStorage.key(i);
                     const rawValue = localStorage.getItem(keyName);
 
-                    // If the key has terms relating to score configurations
                     if (keyName.toLowerCase().includes('score') || keyName.toLowerCase().includes('progress') || keyName.toLowerCase().includes('user')) {
                         const parsedNum = Number(rawValue);
                         if (!isNaN(parsedNum) && parsedNum > highestDiscoveredValue) {
@@ -226,7 +216,6 @@
                     }
                 }
 
-                // Fallback catch: explicitly pull standard game fields if nested in JSON blocks
                 const statsFallback = localStorage.getItem('subway_surfers_stats');
                 if (statsFallback) {
                     const cleanObj = JSON.parse(statsFallback);
@@ -235,7 +224,6 @@
                     }
                 }
 
-                // If a valid score was found, sync it
                 if (highestDiscoveredValue > 0) {
                     syncScoreWithDatabase(highestDiscoveredValue);
                 }
