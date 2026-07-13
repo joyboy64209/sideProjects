@@ -1,0 +1,331 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subway Surfers - Login</title>
+    <style>
+        :root {
+            --bg-color: #f4f5f7; 
+            --blob-1: #ff3b30;
+            --blob-2: #007aff;
+            --blob-opacity: 0.15;
+            --glass-bg: rgba(255, 255, 255, 0.65);
+            --glass-border: rgba(0, 0, 0, 0.08);
+            --glass-shadow: rgba(0, 0, 0, 0.06);
+            --glass-highlight: rgba(255, 255, 255, 0.9);
+            --glass-caustic: rgba(255, 255, 255, 0.2);
+            --text-color: #0f172a;
+            --label-color: #64748b;
+            --input-bg: rgba(0, 0, 0, 0.03);
+            --input-border: rgba(0, 0, 0, 0.1);
+            --btn-bg: #007aff;
+            --btn-text: #ffffff;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #0b1329;
+            --blob-1: #bf5af2;
+            --blob-2: #0a84ff;
+            --blob-opacity: 0.45;
+            --glass-bg: rgba(30, 30, 35, 0.45);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --glass-shadow: rgba(0, 0, 0, 0.6);
+            --glass-highlight: rgba(255, 255, 255, 0.25);
+            --glass-caustic: rgba(255, 255, 255, 0.05);
+            --text-color: #ffffff;
+            --label-color: rgba(255, 255, 255, 0.6);
+            --input-bg: rgba(255, 255, 255, 0.05);
+            --input-border: rgba(255, 255, 255, 0.1);
+            --btn-bg: #0a84ff;
+            --btn-text: #ffffff;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-color);
+            overflow: hidden;
+            transition: background-color 0.4s ease;
+        }
+
+        /* Ambient Blobs matching your Navbar design */
+        .ambient-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: var(--blob-opacity);
+            z-index: 0;
+            pointer-events: none;
+            transition: background 0.8s ease;
+        }
+
+        .blob-1 { width: 45vw; h: 45vw; top: -10%; left: -10%; background: var(--blob-1); }
+        .blob-2 { width: 40vw; h: 40vw; bottom: -10%; right: -10%; background: var(--blob-2); }
+
+        /* Liquid/Frosted Glass container layout rules */
+        .liquid-card {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 380px;
+            padding: 40px;
+            border-radius: 28px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(40px) saturate(210%);
+            -webkit-backdrop-filter: blur(40px) saturate(210%);
+            box-shadow:
+                0 30px 60px -15px var(--glass-shadow),
+                inset 0 2px 3px -1px var(--glass-highlight),
+                inset 0 -2px 4px -1px var(--glass-caustic),
+                inset 0 0 0 1px var(--glass-border);
+            transition: all 0.4s ease;
+        }
+
+        .liquid-card h2 {
+            margin-top: 0;
+            margin-bottom: 28px;
+            font-size: 26px;
+            font-weight: 700;
+            text-align: center;
+            letter-spacing: -0.5px;
+        }
+
+        .input-group {
+            margin-bottom: 22px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--label-color);
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-wrapper input {
+            width: 100%;
+            padding: 12px 16px;
+            padding-right: 46px; /* Space for the visibility toggle */
+            background: var(--input-bg);
+            border: 1px solid var(--input-border);
+            border-radius: 12px;
+            color: var(--text-color);
+            font-size: 15px;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        .input-wrapper input:focus {
+            border-color: var(--btn-bg);
+            box-shadow: 0 0 0 3px rgba(10, 132, 255, 0.15);
+            outline: none;
+        }
+
+        /* Password eye icon layout styling toggle */
+        .visibility-toggle {
+            position: absolute;
+            right: 14px;
+            background: transparent;
+            border: none;
+            color: var(--label-color);
+            cursor: pointer;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.2s ease;
+        }
+
+        .visibility-toggle:hover {
+            color: var(--text-color);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            background: var(--btn-bg);
+            border: none;
+            border-radius: 14px;
+            color: var(--btn-text);
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease;
+        }
+
+        .login-btn:hover {
+            opacity: 0.95;
+            transform: translateY(-1px);
+        }
+
+        .login-btn:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        .error-msg {
+            color: #ff3b30;
+            margin-top: 15px;
+            font-size: 13px;
+            font-weight: 500;
+            text-align: center;
+            display: none;
+        }
+
+        /* Top Right Theme Toggle alignment matching style specs */
+        .theme-toggle-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 20;
+        }
+
+        .theme-btn {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            color: var(--label-color);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .theme-btn:hover {
+            color: var(--text-color);
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body data-theme="dark">
+
+    <div class="theme-toggle-container">
+        <button onclick="toggleTheme()" class="theme-btn" aria-label="Toggle Theme Mode">
+            <svg id="theme-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+        </button>
+    </div>
+
+    <div class="ambient-blob blob-1"></div>
+    <div class="ambient-blob blob-2"></div>
+
+    <div class="liquid-card">
+        <h2>Surfers Portal</h2>
+        <form id="login-form" onsubmit="handleLogin(event)">
+            <div class="input-group">
+                <label for="username">Username</label>
+                <div class="input-wrapper">
+                    <input type="text" id="username" required autocomplete="off" placeholder="Enter username...">
+                </div>
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <div class="input-wrapper">
+                    <input type="password" id="password" required placeholder="Enter password...">
+                    <button type="button" class="visibility-toggle" onclick="togglePasswordVisibility()" aria-label="Toggle password visibility">
+                        <svg id="eye-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <button type="submit" class="login-btn">Launch Application</button>
+            <div id="error-message" class="error-msg"></div>
+        </form>
+    </div>
+
+    <script>
+        function togglePasswordVisibility() {
+            const passwordInput = document.getElementById('password');
+            const eyeIcon = document.getElementById('eye-icon');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                // Show Slash Eye template state context
+                eyeIcon.innerHTML = `
+                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                    <line x1="1" y1="1" x2="23" y2="23"></line>
+                `;
+            } else {
+                passwordInput.type = 'password';
+                // Reset to standard looking eye layout frame
+                eyeIcon.innerHTML = `
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                `;
+            }
+        }
+
+        function toggleTheme() {
+            const body = document.body;
+            const themeIcon = document.getElementById('theme-icon');
+            const isDark = body.getAttribute('data-theme') === 'dark';
+            
+            if (isDark) {
+                body.setAttribute('data-theme', 'light');
+                themeIcon.innerHTML = `
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                `;
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                themeIcon.innerHTML = `<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>`;
+            }
+        }
+
+       // Replace the old handleLogin block in login.html with this code:
+async function handleLogin(event) {
+    event.preventDefault();
+    const username = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value;
+    const errorDiv = document.getElementById('error-message');
+
+    try {
+        const response = await fetch('/api/auth/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password })
+        });
+        const data = await response.json();
+
+        if (response.ok) {
+            localStorage.setItem('surfer_token', data.token);
+            window.location.href = 'dashboard.html'; // Redirect to the intermediate page
+        } else {
+            errorDiv.textContent = data.error || "Authentication failed.";
+            errorDiv.style.display = 'block';
+        }
+    } catch (err) {
+        errorDiv.textContent = "Server down or unreachable.";
+        errorDiv.style.display = 'block';
+    }
+}

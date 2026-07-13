@@ -1,0 +1,249 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Subway Surfers Game</title>
+    <link rel="icon" href="img/FirstAvatar.png">
+
+    <base href="https://cdn.jsdelivr.net/gh/bubbls/subwaysurfersmerge/">
+
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <style>
+        :root {
+            --bg-color: #0b1329;
+            --glass-bg: rgba(30, 30, 35, 0.75);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --text-color: #ffffff;
+            --btn-bg: #ff3b30;
+        }
+
+        body, html {
+            margin: 0; padding: 0; 
+            width: 100%; height: 100%;
+            background-color: var(--bg-color);
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            overflow: hidden;
+        }
+
+        /* Fixed Top Navbar Bar */
+        .game-control-header {
+            position: fixed !important;
+            top: 0; left: 0;
+            width: 100%; height: 60px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border-bottom: 1px solid var(--glass-border);
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 24px; box-sizing: border-box;
+            z-index: 999999 !important; /* Remain above game elements */
+            color: var(--text-color);
+        }
+
+        .game-title {
+            font-size: 16px; font-weight: 600; letter-spacing: 0.5px;
+            display: flex; align-items: center; gap: 8px;
+        }
+
+        .back-dashboard-btn {
+            background: rgba(255, 255, 255, 0.08); border: 1px solid var(--glass-border);
+            padding: 8px 16px; border-radius: 10px; color: #fff;
+            font-size: 14px; font-weight: 600; cursor: pointer;
+            text-decoration: none; transition: all 0.2s ease;
+            display: flex; align-items: center; gap: 6px;
+        }
+
+        .back-dashboard-btn:hover {
+            background: var(--btn-bg); border-color: transparent; transform: translateY(-1px);
+        }
+
+        /* CRITICAL FIX FOR THE WINDOW FRAME:
+           Forces ANY canvas, unity container, or wrapper injected by master-loader.js 
+           to display precisely 60px down from the top and span the rest of the page.
+        */
+        canvas, #unityContainer, #unity-container, .unity-desktop, #webgl-content, #game-container-frame {
+            position: fixed !important;
+            top: 60px !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: calc(100vh - 60px) !important;
+            z-index: 1 !important;
+        }
+    </style>
+
+    <script src="4399.z.js"></script>
+
+    <script>
+        window.config = {
+            loader: "unity",
+            debug: false,
+            maxRatio: 16 / 9,
+            minRatio: 9 / 16,
+            title: "Subway Surfers: Zurich",
+            unityVersion: "2019.4.18f1",
+            unityWebglBuildUrl: "ZurichNewPrivacy.json",
+            fileSize: 36,
+            cachedDecompressedFileSizes: {
+                "ZurichNewPrivacy.asm.code.unityweb": 9078047,
+                "ZurichNewPrivacy.asm.framework.unityweb": 86375,
+                "ZurichNewPrivacy.asm.memory.unityweb": 956748,
+                "ZurichNewPrivacy.data.unityweb": 19164736,
+                "ZurichNewPrivacy.wasm.code.unityweb": 7282721,
+                "ZurichNewPrivacy.wasm.framework.unityweb": 90700
+            }
+        };
+
+        window.mergedBlobUrls = {};
+        window.assetsReady = false;
+
+        async function mergeSplitFile(fileUrlBase, numParts = 2) {
+            const partUrls = Array.from({ length: numParts }, (_, i) => `${fileUrlBase}.part${i + 1}`);
+            try {
+                const responses = await Promise.all(partUrls.map(url => fetch(url)));
+                if (responses.some(r => !r.ok)) return null;
+                const parts = await Promise.all(responses.map(r => r.arrayBuffer()));
+                const combinedBlob = new Blob(parts, { type: "application/octet-stream" });
+                return URL.createObjectURL(combinedBlob);
+            } catch (error) { return null; }
+        }
+
+        function setupXHRInterceptor() {
+            if (window.xhrInterceptorInstalled) return;
+            const originalOpen = XMLHttpRequest.prototype.open;
+            const originalSend = XMLHttpRequest.prototype.send;
+
+            XMLHttpRequest.prototype.open = function (method, url, ...args) {
+                this._url = url; this._method = method; this._args = args;
+                let finalUrl = url;
+                for (const [filename, blobUrl] of Object.entries(window.mergedBlobUrls)) {
+                    if (url.includes(filename)) { finalUrl = blobUrl; break; }
+                }
+                return originalOpen.call(this, method, finalUrl, ...args);
+            };
+
+            XMLHttpRequest.prototype.send = function (...args) {
+                const xhr = this;
+                if (!window.assetsReady) {
+                    const checkReady = setInterval(() => {
+                        if (window.assetsReady) { clearInterval(checkReady); originalSend.apply(xhr, args); }
+                    }, 50);
+                    return;
+                }
+                return originalSend.apply(this, args);
+            };
+            window.xhrInterceptorInstalled = true;
+        }
+
+        async function prepareGameAssets() {
+            try {
+                window.assetsReady = false;
+                delete window.xhrInterceptorInstalled;
+                window.mergedBlobUrls = {};
+                setupXHRInterceptor();
+                const filesToMerge = ["ZurichNewPrivacy.data.unityweb", "ZurichNewPrivacy.wasm.code.unityweb"];
+                for (const filename of filesToMerge) {
+                    const blobUrl = await mergeSplitFile(filename, 2);
+                    if (blobUrl) window.mergedBlobUrls[filename] = blobUrl;
+                }
+                window.assetsPrepared = true; window.assetsReady = true;
+            } catch (error) { window.assetsPrepared = false; window.assetsReady = true; }
+        }
+        prepareGameAssets();
+    </script>
+</head>
+
+<body>
+
+    <header class="game-control-header">
+        <div class="game-title">
+            <span>🏃‍♂️</span> Subway Surfers (Zurich Edition)
+        </div>
+        <button onclick="returnToDashboard()" class="back-dashboard-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+            Dashboard
+        </button>
+    </header>
+
+    <div id="game-container-frame">
+        <script src="master-loader.js"></script>
+    </div>
+
+    <script>
+        const localHost = window.location.origin;
+        const token = localStorage.getItem('surfer_token');
+        
+        if (!token) window.location.href = localHost + '/login.html';
+
+        function returnToDashboard() {
+            window.location.href = localHost + '/dashboard.html';
+        }
+
+        // CRITICAL FIX FOR SCORE TRACKING:
+        // Automatically scans all local storage data parameters to extract the score metrics
+        let maximumHighRegisteredScore = 0;
+
+        function syncScoreWithDatabase(score) {
+            if (score <= maximumHighRegisteredScore) return; 
+            
+            maximumHighRegisteredScore = score;
+            console.log(`Synchronization targeted sync initialized. Saving score: ${score}`);
+
+            fetch(localHost + '/api/user/score', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ score: score })
+            })
+            .then(res => res.json())
+            .then(data => console.log("Database response:", data.message))
+            .catch(err => console.error("Database sync error:", err));
+        }
+
+        // Run full database scanner loop engine context every 2 seconds
+        setInterval(() => {
+            try {
+                let highestDiscoveredValue = 0;
+
+                // Loop through all items in localStorage to catch any matching game data keys
+                for (let i = 0; i < localStorage.length; i++) {
+                    const keyName = localStorage.key(i);
+                    const rawValue = localStorage.getItem(keyName);
+
+                    // If the key has terms relating to score configurations
+                    if (keyName.toLowerCase().includes('score') || keyName.toLowerCase().includes('progress') || keyName.toLowerCase().includes('user')) {
+                        const parsedNum = Number(rawValue);
+                        if (!isNaN(parsedNum) && parsedNum > highestDiscoveredValue) {
+                            highestDiscoveredValue = parsedNum;
+                        }
+                    }
+                }
+
+                // Fallback catch: explicitly pull standard game fields if nested in JSON blocks
+                const statsFallback = localStorage.getItem('subway_surfers_stats');
+                if (statsFallback) {
+                    const cleanObj = JSON.parse(statsFallback);
+                    if (cleanObj.highScore && Number(cleanObj.highScore) > highestDiscoveredValue) {
+                        highestDiscoveredValue = Number(cleanObj.highScore);
+                    }
+                }
+
+                // If a valid score was found, sync it
+                if (highestDiscoveredValue > 0) {
+                    syncScoreWithDatabase(highestDiscoveredValue);
+                }
+            } catch (e) {
+                // Prevent background log cluttering
+            }
+        }, 2000);
+    </script>
+
+</body>
+</html>
