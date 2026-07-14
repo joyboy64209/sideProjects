@@ -1,0 +1,42 @@
+/* Custom Font styles and Global variables */
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
+h1, h2, h3, h4, .font-rajdhani {
+  font-family: 'Rajdhani', sans-serif;
+}
+
+/* Custom Tailwind Variable Configuration via CSS Inject */
+:root {
+  --industrial-dark: #0a1628;
+  --industrial-blue: #1e3a5f;
+  --industrial-yellow: #f59e0b;
+}
+
+/* Tailwind configuration bridge */
+.bg-industrial-dark { background-color: var(--industrial-dark); }
+.bg-industrial-blue { background-color: var(--industrial-blue); }
+.bg-industrial-yellow { background-color: var(--industrial-yellow); }
+.text-industrial-dark { color: var(--industrial-dark); }
+.text-industrial-blue { color: var(--industrial-blue); }
+.text-industrial-yellow { color: var(--industrial-yellow); }
+.border-industrial-blue { border-color: var(--industrial-blue); }
+.border-industrial-yellow { border-color: var(--industrial-yellow); }
+.shadow-yellow-500\/10 { box-shadow: 0 4px 6px -1px rgba(245, 158, 11, 0.1); }
+.shadow-yellow-500\/20 { box-shadow: 0 10px 15px -3px rgba(245, 158, 11, 0.2); }
+
+/* Custom Sliders for Testimonial Section */
+.testimonial-slide {
+  transition: opacity 0.5s ease-in-out;
+}
+
+.testimonial-slide.opacity-100 {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.testimonial-slide.opacity-0 {
+  opacity: 0;
+  pointer-events: none;
+}

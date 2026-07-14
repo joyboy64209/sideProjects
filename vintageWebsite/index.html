@@ -1,0 +1,811 @@
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Vintage Technologies PLC - Top Rated Software Development Company in Ethiopia. Custom software development, IT consultancy, and applications maintenance.">
+  <title>Vintage Technologies PLC | Software Development &amp; IT Solutions</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&amp;family=Open+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'vintage-dark': '#0f172a',
+            'vintage-blue': '#1e1b4b',
+            'vintage-accent': '#4f46e5',
+            'vintage-orange': '#f59e0b',
+            'vintage-orange-dark': '#d97706',
+            'vintage-gray': '#64748b',
+            'vintage-light': '#f8fafc'
+          },
+          fontFamily: {
+            'heading': ['Rajdhani', 'sans-serif'],
+            'body': ['Open Sans', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    
+    .hero-gradient {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.98) 0%, rgba(30, 27, 75, 0.93) 50%, rgba(79, 70, 229, 0.85) 100%);
+    }
+    
+    .service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(79, 70, 229, 0.2);
+    }
+    
+    .project-card:hover .project-overlay {
+      opacity: 1;
+    }
+    
+    .stat-counter {
+      background: linear-gradient(135deg, #1e1b4b 0%, #4f46e5 100%);
+    }
+    
+    .nav-scrolled {
+      background: rgba(15, 23, 42, 0.98) !important;
+      backdrop-filter: blur(10px);
+    }
+    
+    .animate-fade-in {
+      animation: fadeIn 0.6s ease-out forwards;
+    }
+    
+    .animate-slide-up {
+      animation: slideUp 0.8s ease-out forwards;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .stagger-1 { animation-delay: 0.1s; }
+    .stagger-2 { animation-delay: 0.2s; }
+    .stagger-3 { animation-delay: 0.3s; }
+    .stagger-4 { animation-delay: 0.4s; }
+    
+    .accent-glow {
+      box-shadow: 0 0 30px rgba(79, 70, 229, 0.4);
+    }
+    
+    .text-gradient {
+      background: linear-gradient(90deg, #f59e0b, #fbbf24);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full font-body bg-vintage-light text-vintage-dark overflow-x-hidden">
+  
+  <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-vintage-dark transition-all duration-300">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-20">
+     <a href="#home" class="flex items-center space-x-3">
+      <div class="w-12 h-12 bg-vintage-accent rounded-lg flex items-center justify-center">
+       <i data-lucide="code-2" class="w-7 h-7 text-white"></i>
+      </div>
+      <div>
+       <span id="nav-company-name" class="text-xl font-heading font-bold text-white tracking-wider">V.T</span> 
+       <span class="block text-xs text-vintage-orange font-semibold uppercase tracking-wider">PLC</span>
+      </div>
+     </a> 
+     
+     <div class="hidden lg:flex items-center space-x-8">
+      <a href="#home" class="text-gray-300 hover:text-vintage-orange transition-colors font-medium">Home</a> 
+      <a href="#about" class="text-gray-300 hover:text-vintage-orange transition-colors font-medium">About Us</a> 
+      <a href="#services" class="text-gray-300 hover:text-vintage-orange transition-colors font-medium">Services</a> 
+      <a href="#portfolio" class="text-gray-300 hover:text-vintage-orange transition-colors font-medium">Portfolio</a> 
+      <a href="#opportunities" class="text-gray-300 hover:text-vintage-orange transition-colors font-medium">Opportunities</a> 
+      <a href="#contact" class="text-gray-300 hover:text-vintage-orange transition-colors font-medium">Contact</a>
+     </div>
+     
+     <div class="hidden lg:flex items-center space-x-6">
+      <a href="tel:+25135659625" class="flex items-center space-x-2 text-white"> 
+       <i data-lucide="phone" class="w-5 h-5 text-vintage-orange"></i> 
+       <span id="nav-phone" class="font-semibold">+251-93565-9625</span> 
+      </a> 
+      <a href="#contact" class="bg-vintage-orange hover:bg-vintage-orange-dark text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:shadow-lg"> 
+       Get in Touch 
+      </a>
+     </div>
+     
+     <button id="mobile-menu-btn" class="lg:hidden text-white p-2"> 
+      <i data-lucide="menu" class="w-6 h-6"></i> 
+     </button>
+    </div>
+   </div>
+   
+   <div id="mobile-menu" class="hidden lg:hidden bg-vintage-dark border-t border-vintage-blue">
+    <div class="px-4 py-6 space-y-4">
+     <a href="#home" class="block text-gray-300 hover:text-vintage-orange py-2">Home</a> 
+     <a href="#about" class="block text-gray-300 hover:text-vintage-orange py-2">About</a> 
+     <a href="#services" class="block text-gray-300 hover:text-vintage-orange py-2">Services</a> 
+     <a href="#portfolio" class="block text-gray-300 hover:text-vintage-orange py-2">Portfolio</a> 
+     <a href="#opportunities" class="block text-gray-300 hover:text-vintage-orange py-2">Opportunities</a> 
+     <a href="#contact" class="block text-gray-300 hover:text-vintage-orange py-2">Contact</a> 
+     <a href="#contact" class="block bg-vintage-orange text-white text-center py-3 rounded-lg font-semibold mt-4">Get in Touch</a>
+    </div>
+   </div>
+  </nav>
+
+  <section id="home" class="relative min-h-screen flex items-center">
+   <div class="absolute inset-0">
+    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=1920&amp;q=80" alt="Software engineering team collaborating in high-tech development office" class="w-full h-full object-cover" loading="lazy" onerror="console.error('Image failed to load:', this.src); this.style.background='linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%)'; this.alt='Software Engineering Services';">
+    <div class="absolute inset-0 hero-gradient"></div>
+   </div>
+   <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
+    <div class="max-w-3xl">
+     <div class="animate-fade-in">
+      <span class="inline-flex items-center px-4 py-2 bg-vintage-accent/20 border border-vintage-accent/30 rounded-full text-white text-sm font-semibold mb-6"> 
+       <i data-lucide="globe" class="w-4 h-4 mr-2 text-vintage-orange"></i> Top Rated Software Company in Ethiopia 
+      </span>
+     </div>
+     <h1 id="hero-headline" class="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold text-white leading-tight mb-6 animate-slide-up">
+      Transforming Ideas Into <span class="text-gradient">Digital Reality</span>
+     </h1>
+     <p id="hero-subtext" class="text-xl text-gray-300 mb-10 animate-slide-up stagger-1 max-w-2xl">
+      We deliver scalable, secure, and high-performance software. Elevate your brand with Ethiopia's leading collection of creative and collaborative minds.
+     </p>
+     <div class="flex flex-col sm:flex-row gap-4 animate-slide-up stagger-2">
+      <a href="#contact" class="inline-flex items-center justify-center bg-vintage-orange hover:bg-vintage-orange-dark text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 hover:shadow-xl accent-glow"> 
+       <i data-lucide="mail" class="w-5 h-5 mr-2"></i> Business Inquiries 
+      </a> 
+      <a href="#portfolio" class="inline-flex items-center justify-center bg-white/10 hover:bg-white/20 text-white border border-white/30 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 backdrop-blur-sm"> 
+       <i data-lucide="layers" class="w-5 h-5 mr-2"></i> Explore Portfolio 
+      </a>
+     </div>
+     <div class="flex flex-wrap gap-6 mt-12 animate-slide-up stagger-3">
+      <div class="flex items-center space-x-2 text-gray-300">
+       <i data-lucide="check-circle" class="w-5 h-5 text-vintage-orange"></i> <span>Custom Architectures</span>
+      </div>
+      <div class="flex items-center space-x-2 text-gray-300">
+       <i data-lucide="users" class="w-5 h-5 text-vintage-orange"></i> <span>Elite Developers</span>
+      </div>
+      <div class="flex items-center space-x-2 text-gray-300">
+       <i data-lucide="sparkles" class="w-5 h-5 text-vintage-orange"></i> <span>Cutting Edge Tech</span>
+      </div>
+     </div>
+    </div>
+   </div>
+   <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+    <a href="#about" class="text-white/60 hover:text-white transition-colors"> 
+     <i data-lucide="chevron-down" class="w-8 h-8"></i> 
+    </a>
+   </div>
+  </section>
+
+  <section class="relative z-20 -mt-16">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+     <div class="stat-counter rounded-xl p-6 text-center text-white">
+      <div class="text-4xl font-heading font-bold text-vintage-orange mb-2">10+</div>
+      <div class="text-gray-300 text-sm">Years in ICT Solutions</div>
+     </div>
+     <div class="stat-counter rounded-xl p-6 text-center text-white">
+      <div class="text-4xl font-heading font-bold text-vintage-orange mb-2">50+</div>
+      <div class="text-gray-300 text-sm">Custom Enterprise Apps</div>
+     </div>
+     <div class="stat-counter rounded-xl p-6 text-center text-white">
+      <div class="text-4xl font-heading font-bold text-vintage-orange mb-2">100%</div>
+      <div class="text-gray-300 text-sm">Client Satisfaction</div>
+     </div>
+     <div class="stat-counter rounded-xl p-6 text-center text-white">
+      <div class="text-4xl font-heading font-bold text-vintage-orange mb-2">12M+</div>
+      <div class="text-gray-300 text-sm">End-Users Served</div>
+     </div>
+    </div>
+   </div>
+  </section>
+
+  <section id="about" class="py-24 bg-white">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+     <div>
+      <span class="inline-block px-4 py-2 bg-vintage-accent/10 text-vintage-accent rounded-full text-sm font-semibold mb-6">About Vintage Technologies</span>
+      <h2 class="text-4xl lg:text-5xl font-heading font-bold text-vintage-dark mb-6">
+       Innovating the Digital Frontier of <span class="text-vintage-accent">East Africa</span>
+      </h2>
+      <p class="text-lg text-vintage-gray mb-6 leading-relaxed">
+       Vintage Technologies PLC is one of the top-rated software development companies in Ethiopia, with an evolving dream of transforming into a key East African tech hub. Based in Addis Ababa, we serve the urgent demand for premium IT-enabled business solutions, customized architectures, and complete systems integration.
+      </p>
+      <p class="text-lg text-vintage-gray mb-8 leading-relaxed">
+       We believe in the power of highly interactive and modern designs. Our engineering and design squads cultivate strategic relationships to support collaborative processes, providing high-quality software, support teams, and dedicated project leads on demand.
+      </p>
+      <div class="grid sm:grid-cols-2 gap-6 mb-8">
+       <div class="flex items-start space-x-4">
+        <div class="w-12 h-12 bg-vintage-accent/10 rounded-lg flex items-center justify-center flex-shrink-0">
+         <i data-lucide="laptop" class="w-6 h-6 text-vintage-accent"></i>
+        </div>
+        <div>
+         <h4 class="font-heading font-bold text-vintage-dark mb-1">Tailored Engineering</h4>
+         <p class="text-sm text-vintage-gray">Bespoke software built to scale exactly with corporate objectives.</p>
+        </div>
+       </div>
+       <div class="flex items-start space-x-4">
+        <div class="w-12 h-12 bg-vintage-accent/10 rounded-lg flex items-center justify-center flex-shrink-0">
+         <i data-lucide="headset" class="w-6 h-6 text-vintage-accent"></i>
+        </div>
+        <div>
+         <h4 class="font-heading font-bold text-vintage-dark mb-1">16x7 Support Staff</h4>
+         <p class="text-sm text-vintage-gray">Reliable troubleshooting, monitoring, and live technical care.</p>
+        </div>
+       </div>
+      </div>
+      <a href="#portfolio" class="inline-flex items-center text-vintage-accent font-semibold hover:text-vintage-orange transition-colors">
+       Explore Our Masterpieces <i data-lucide="arrow-right" class="w-5 h-5 ml-2"></i>
+      </a>
+     </div>
+     <div class="relative">
+      <div class="relative rounded-2xl overflow-hidden shadow-2xl">
+       <img src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=800&amp;q=80" alt="UX designers wireframing web applications" class="w-full h-auto" loading="lazy" onerror="console.error('Image failed to load:', this.src); this.style.background='#1e1b4b'; this.style.height='400px'; this.alt='Design & Tech Collaboration';">
+      </div>
+      <div class="absolute -bottom-8 -left-8 bg-vintage-dark text-white p-6 rounded-xl shadow-xl max-w-xs hidden sm:block">
+       <div class="flex items-center space-x-4 mb-4">
+        <div class="w-14 h-14 bg-vintage-orange rounded-full flex items-center justify-center">
+         <i data-lucide="trophy" class="w-7 h-7 text-white"></i>
+        </div>
+        <div>
+         <div class="text-2xl font-heading font-bold">Top-Rated</div>
+         <div class="text-gray-400 text-sm">ICT Agency in Ethiopia</div>
+        </div>
+       </div>
+       <p class="text-gray-300 text-sm">Empowering national institutions, dynamic startups, and international NGOs.</p>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section>
+
+  <section id="services" class="py-24 bg-vintage-light">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+     <span class="inline-block px-4 py-2 bg-vintage-accent/10 text-vintage-accent rounded-full text-sm font-semibold mb-6">Our Expertise</span>
+     <h2 class="text-4xl lg:text-5xl font-heading font-bold text-vintage-dark mb-6">
+      Comprehensive <span class="text-vintage-accent">Digital Solutions</span>
+     </h2>
+     <p class="text-lg text-vintage-gray max-w-3xl mx-auto">
+      We construct end-to-end applications designed around secure infrastructures, smooth navigation paths, and lightning-fast loading speeds.
+     </p>
+    </div>
+    
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+     <div class="service-card bg-white rounded-2xl overflow-hidden shadow-lg transition-all duration-300 group">
+      <div class="relative h-48 overflow-hidden">
+       <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&amp;q=80" alt="Code editing environment with complex logic" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy">
+       <div class="absolute top-4 left-4 w-12 h-12 bg-vintage-accent rounded-lg flex items-center justify-center">
+        <i data-lucide="terminal" class="w-6 h-6 text-white"></i>
+       </div>
+      </div>
+      <div class="p-6">
+       <h3 class="text-xl font-heading font-bold text-vintage-dark mb-3">Custom Software Development</h3>
+       <p class="text-vintage-gray text-sm mb-4">Scalable cloud-ready applications, backend APIs, and web-based solutions tailored to specific corporate processes.</p>
+       <a href="#contact" class="inline-flex items-center text-vintage-accent font-semibold text-sm hover:text-vintage-orange">
+        Request Consultation <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+       </a>
+      </div>
+     </div>
+     
+     <div class="service-card bg-white rounded-2xl overflow-hidden shadow-lg transition-all duration-300 group">
+      <div class="relative h-48 overflow-hidden">
+       <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&amp;q=80" alt="Security network encryption visual illustration" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy">
+       <div class="absolute top-4 left-4 w-12 h-12 bg-vintage-accent rounded-lg flex items-center justify-center">
+        <i data-lucide="smartphone" class="w-6 h-6 text-white"></i>
+       </div>
+      </div>
+      <div class="p-6">
+       <h3 class="text-xl font-heading font-bold text-vintage-dark mb-3">Mobile Application Development</h3>
+       <p class="text-vintage-gray text-sm mb-4">Highly responsive and secure native &amp; cross-platform mobile experiences on both iOS and Android stores.</p>
+       <a href="#contact" class="inline-flex items-center text-vintage-accent font-semibold text-sm hover:text-vintage-orange">
+        Request Consultation <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+       </a>
+      </div>
+     </div>
+     
+     <div class="service-card bg-white rounded-2xl overflow-hidden shadow-lg transition-all duration-300 group">
+      <div class="relative h-48 overflow-hidden">
+       <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&amp;q=80" alt="IT Consulting strategy planning board" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy">
+       <div class="absolute top-4 left-4 w-12 h-12 bg-vintage-accent rounded-lg flex items-center justify-center">
+        <i data-lucide="line-chart" class="w-6 h-6 text-white"></i>
+       </div>
+      </div>
+      <div class="p-6">
+       <h3 class="text-xl font-heading font-bold text-vintage-dark mb-3">IT Consultancy</h3>
+       <p class="text-vintage-gray text-sm mb-4">Strategic technology audits, structural design planning, and optimization roadmaps to scale complex business pipelines.</p>
+       <a href="#contact" class="inline-flex items-center text-vintage-accent font-semibold text-sm hover:text-vintage-orange">
+        Request Consultation <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+       </a>
+      </div>
+     </div>
+
+     <div class="service-card bg-white rounded-2xl overflow-hidden shadow-lg transition-all duration-300 group">
+      <div class="relative h-48 overflow-hidden">
+       <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&amp;q=80" alt="ERP software interactive dashboards" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy">
+       <div class="absolute top-4 left-4 w-12 h-12 bg-vintage-accent rounded-lg flex items-center justify-center">
+        <i data-lucide="database" class="w-6 h-6 text-white"></i>
+       </div>
+      </div>
+      <div class="p-6">
+       <h3 class="text-xl font-heading font-bold text-vintage-dark mb-3">Enterprise Systems (ERP)</h3>
+       <p class="text-vintage-gray text-sm mb-4">Full-spectrum management solutions integrating finance, stock, asset monitoring, payroll, human resources, and robust CRM networks.</p>
+       <a href="#contact" class="inline-flex items-center text-vintage-accent font-semibold text-sm hover:text-vintage-orange">
+        Request Consultation <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+       </a>
+      </div>
+     </div>
+
+     <div class="service-card bg-white rounded-2xl overflow-hidden shadow-lg transition-all duration-300 group">
+      <div class="relative h-48 overflow-hidden">
+       <img src="https://images.unsplash.com/photo-1581092921461-eab62e97a780?w=600&amp;q=80" alt="Servers in network center monitoring tools" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy">
+       <div class="absolute top-4 left-4 w-12 h-12 bg-vintage-accent rounded-lg flex items-center justify-center">
+        <i data-lucide="heart-handshake" class="w-6 h-6 text-white"></i>
+       </div>
+      </div>
+      <div class="p-6">
+       <h3 class="text-xl font-heading font-bold text-vintage-dark mb-3">Maintenance &amp; Support</h3>
+       <p class="text-vintage-gray text-sm mb-4">Reliable software lifecycles, database operations, routine bug-fixing pipelines, security patch updates, and continuous platform deployments.</p>
+       <a href="#contact" class="inline-flex items-center text-vintage-accent font-semibold text-sm hover:text-vintage-orange">
+        Request Consultation <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+       </a>
+      </div>
+     </div>
+
+     <div class="service-card bg-white rounded-2xl overflow-hidden shadow-lg transition-all duration-300 group">
+      <div class="relative h-48 overflow-hidden">
+       <img src="https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=600&amp;q=80" alt="UX and UI creative strategy session and prototyping" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy">
+       <div class="absolute top-4 left-4 w-12 h-12 bg-vintage-accent rounded-lg flex items-center justify-center">
+        <i data-lucide="palette" class="w-6 h-6 text-white"></i>
+       </div>
+      </div>
+      <div class="p-6">
+       <h3 class="text-xl font-heading font-bold text-vintage-dark mb-3">Brand &amp; UI/UX Strategy</h3>
+       <p class="text-vintage-gray text-sm mb-4">Converting product vision into gorgeous visual structures, interactive prototypes, and modern, accessible user interfaces.</p>
+       <a href="#contact" class="inline-flex items-center text-vintage-accent font-semibold text-sm hover:text-vintage-orange">
+        Request Consultation <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+       </a>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section>
+
+  <section id="portfolio" class="py-24 bg-white">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+     <span class="inline-block px-4 py-2 bg-vintage-accent/10 text-vintage-accent rounded-full text-sm font-semibold mb-6">Recent Deliverables</span>
+     <h2 class="text-4xl lg:text-5xl font-heading font-bold text-vintage-dark mb-6">
+      Our <span class="text-vintage-accent">Signature Projects</span>
+     </h2>
+     <p class="text-lg text-vintage-gray max-w-3xl mx-auto">
+      Discover real systems deployed across municipal networks, public agencies, major NGOs, and automated corporate environments.
+     </p>
+    </div>
+    
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+     <div class="project-card relative rounded-2xl overflow-hidden group cursor-pointer shadow-lg">
+      <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&amp;q=80" alt="ERP system visual interface" class="w-full h-72 object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy">
+      <div class="project-overlay absolute inset-0 bg-gradient-to-t from-vintage-dark via-vintage-dark/80 to-transparent opacity-90 lg:opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+       <span class="text-vintage-orange text-sm font-semibold">Enterprise Resource Planning</span>
+       <h3 class="text-xl font-heading font-bold text-white">Robust Custom ERP System</h3>
+       <p class="text-gray-300 text-sm mt-2">Integrating multi-tier finances, assets control, payroll management, and active supplier logs.</p>
+      </div>
+     </div>
+
+     <div class="project-card relative rounded-2xl overflow-hidden group cursor-pointer shadow-lg">
+      <img src="https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?w=600&amp;q=80" alt="Logistics mobile routing on phone screen" class="w-full h-72 object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy">
+      <div class="project-overlay absolute inset-0 bg-gradient-to-t from-vintage-dark via-vintage-dark/80 to-transparent opacity-90 lg:opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+       <span class="text-vintage-orange text-sm font-semibold">Web &amp; Mobile App</span>
+       <h3 class="text-xl font-heading font-bold text-white">EBS Dispatch Engine</h3>
+       <p class="text-gray-300 text-sm mt-2">Dynamic route assignment, active tracking panels, and automated courier-passenger syncing.</p>
+      </div>
+     </div>
+
+     <div class="project-card relative rounded-2xl overflow-hidden group cursor-pointer shadow-lg">
+      <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=600&amp;q=80" alt="HR payroll specialists working together" class="w-full h-72 object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy">
+      <div class="project-overlay absolute inset-0 bg-gradient-to-t from-vintage-dark via-vintage-dark/80 to-transparent opacity-90 lg:opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+       <span class="text-vintage-orange text-sm font-semibold">NGO System Automation</span>
+       <h3 class="text-xl font-heading font-bold text-white">Plan International Payroll</h3>
+       <p class="text-gray-300 text-sm mt-2">Securing multi-currency client-server databases to process internal payroll pipelines in Addis Ababa.</p>
+      </div>
+     </div>
+
+     <div class="project-card relative rounded-2xl overflow-hidden group cursor-pointer shadow-lg">
+      <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&amp;q=80" alt="Talent matching platform digital dashboard" class="w-full h-72 object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy">
+      <div class="project-overlay absolute inset-0 bg-gradient-to-t from-vintage-dark via-vintage-dark/80 to-transparent opacity-90 lg:opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+       <span class="text-vintage-orange text-sm font-semibold">Job Portal App</span>
+       <h3 class="text-xl font-heading font-bold text-white">Emebet Matching App</h3>
+       <p class="text-gray-300 text-sm mt-2">Connecting job seekers with immediate career openings through a seamless mobile interface.</p>
+      </div>
+     </div>
+
+     <div class="project-card relative rounded-2xl overflow-hidden group cursor-pointer shadow-lg">
+      <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&amp;q=80" alt="Automated administrative portal" class="w-full h-72 object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy">
+      <div class="project-overlay absolute inset-0 bg-gradient-to-t from-vintage-dark via-vintage-dark/80 to-transparent opacity-90 lg:opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+       <span class="text-vintage-orange text-sm font-semibold">Government MIS System</span>
+       <h3 class="text-xl font-heading font-bold text-white">National Volunteer Database</h3>
+       <p class="text-gray-300 text-sm mt-2">Tracking national program enrollment profiles via custom server architectures.</p>
+      </div>
+     </div>
+
+     <div class="project-card relative rounded-2xl overflow-hidden group cursor-pointer shadow-lg">
+      <img src="https://images.unsplash.com/photo-1508873535684-277a3cbcc4e8?w=600&amp;q=80" alt="Vehicle mechanical diagnostic testing process" class="w-full h-72 object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy">
+      <div class="project-overlay absolute inset-0 bg-gradient-to-t from-vintage-dark via-vintage-dark/80 to-transparent opacity-90 lg:opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+       <span class="text-vintage-orange text-sm font-semibold">Government Logistics</span>
+       <h3 class="text-xl font-heading font-bold text-white">Vehicle Inspection System (VIMS)</h3>
+       <p class="text-gray-300 text-sm mt-2">A high-performance system developed for the Public Service Transport Service.</p>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section>
+
+  <section id="opportunities" class="py-24 bg-vintage-light">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+     <div>
+      <span class="inline-block px-4 py-2 bg-vintage-accent/10 text-vintage-accent rounded-full text-sm font-semibold mb-6">Build Your Tech Future</span>
+      <h2 class="text-4xl font-heading font-bold text-vintage-dark mb-6">
+       Grow and Challenge Your Potential with <span class="text-vintage-accent">Vintage</span>
+      </h2>
+      <p class="text-lg text-vintage-gray mb-6 leading-relaxed">
+       We believe in incubating talent, building solid career steps, and fueling the technological infrastructure of tomorrow. We offer direct tracks for experienced engineers and young graduates looking to make a massive impact.
+      </p>
+      
+      <div class="space-y-4">
+       <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm flex justify-between items-center">
+        <div>
+         <h4 class="font-heading font-bold text-vintage-dark">Regular Vacancies &amp; Jobs</h4>
+         <p class="text-sm text-vintage-gray">Join as a full-time Senior Engineer, Project Manager, or UI/UX Lead.</p>
+        </div>
+        <a href="#contact" class="text-vintage-accent hover:text-vintage-orange"><i data-lucide="arrow-up-right" class="w-6 h-6"></i></a>
+       </div>
+       <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm flex justify-between items-center">
+        <div>
+         <h4 class="font-heading font-bold text-vintage-dark">Structured Internships</h4>
+         <p class="text-sm text-vintage-gray">Work beside industry legends on production-level projects.</p>
+        </div>
+        <a href="#contact" class="text-vintage-accent hover:text-vintage-orange"><i data-lucide="arrow-up-right" class="w-6 h-6"></i></a>
+       </div>
+       <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm flex justify-between items-center">
+        <div>
+         <h4 class="font-heading font-bold text-vintage-dark">Tech Hackathons &amp; Competitions</h4>
+         <p class="text-sm text-vintage-gray">Flex your structural logic and win amazing hardware sponsorships.</p>
+        </div>
+        <a href="#contact" class="text-vintage-accent hover:text-vintage-orange"><i data-lucide="arrow-up-right" class="w-6 h-6"></i></a>
+       </div>
+      </div>
+     </div>
+     
+     <div class="bg-vintage-dark rounded-2xl p-8 text-white relative overflow-hidden accent-glow">
+      <div class="absolute top-0 right-0 transform translate-x-1/4 -translate-y-1/4 w-72 h-72 bg-vintage-accent/20 rounded-full blur-3xl"></div>
+      <h3 class="text-2xl font-heading font-bold mb-4">Talent Pool Registration</h3>
+      <p class="text-gray-300 text-sm mb-6">
+       Even if there isn't an open role matching your skill profile today, submit your credentials to our premium pool! We regularly pick specialists when new initiatives emerge.
+      </p>
+      
+      <form id="talent-form" class="space-y-4 relative z-10">
+       <div>
+        <label class="block text-xs uppercase tracking-wider text-gray-400 font-semibold mb-2">Full Name</label>
+        <input type="text" placeholder="Your Name" class="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:border-vintage-orange transition-colors" required>
+       </div>
+       <div>
+        <label class="block text-xs uppercase tracking-wider text-gray-400 font-semibold mb-2">Email Address</label>
+        <input type="email" placeholder="you@domain.com" class="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:border-vintage-orange transition-colors" required>
+       </div>
+       <div>
+        <label class="block text-xs uppercase tracking-wider text-gray-400 font-semibold mb-2">Primary Discipline</label>
+        <select class="w-full bg-vintage-blue border border-white/20 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-vintage-orange transition-colors">
+         <option>Fullstack Development (Node.js/React)</option>
+         <option>Mobile App Development (Flutter/React Native)</option>
+         <option>QA Testing &amp; Automation</option>
+         <option>UI/UX &amp; Brand Strategy</option>
+         <option>Business Development &amp; Marketing</option>
+        </select>
+       </div>
+       <button type="submit" class="w-full bg-vintage-orange hover:bg-vintage-orange-dark text-white font-semibold py-3 rounded-lg transition-colors duration-300">
+        Register in Talent Pool
+       </button>
+      </form>
+     </div>
+    </div>
+   </div>
+  </section>
+
+  <section class="py-24 bg-vintage-dark text-white relative overflow-hidden">
+   <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,#1e1b4b,transparent)]"></div>
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="text-center mb-16">
+     <span class="inline-block px-4 py-2 bg-white/10 text-vintage-orange rounded-full text-sm font-semibold mb-6">Client Testimonials</span>
+     <h2 class="text-4xl lg:text-5xl font-heading font-bold mb-6">Discover what our satisfied clients say</h2>
+     <p class="text-lg text-gray-400 max-w-3xl mx-auto">We thrive on building authentic collaborative relationships and delivering flawless technological systems.</p>
+    </div>
+    
+    <div class="grid md:grid-cols-2 gap-8">
+     <div class="bg-vintage-blue/50 backdrop-blur-sm rounded-2xl p-8 border border-vintage-accent/30">
+      <div class="flex items-center space-x-1 mb-4">
+       <i data-lucide="star" class="w-5 h-5 text-vintage-orange fill-current"></i>
+       <i data-lucide="star" class="w-5 h-5 text-vintage-orange fill-current"></i>
+       <i data-lucide="star" class="w-5 h-5 text-vintage-orange fill-current"></i>
+       <i data-lucide="star" class="w-5 h-5 text-vintage-orange fill-current"></i>
+       <i data-lucide="star" class="w-5 h-5 text-vintage-orange fill-current"></i>
+      </div>
+      <p class="text-gray-300 mb-6 italic">
+       "Vintage Technology developed the VIMS (Vehicle Inspection Management System) for our organization, Public Service Transport Service, in an incredibly short period of time. I'm highly thankful for their continuous engineering support and smooth communication channels."
+      </p>
+      <div class="flex items-center space-x-4">
+       <div class="w-12 h-12 bg-vintage-accent rounded-full flex items-center justify-center font-bold text-white">KG</div>
+       <div>
+        <h4 class="font-semibold text-white">Kalkidan Gebeyehu</h4>
+        <p class="text-gray-400 text-sm">Coordinator, F.D.R.E. Public Service Transport</p>
+       </div>
+      </div>
+     </div>
+
+     <div class="bg-vintage-blue/50 backdrop-blur-sm rounded-2xl p-8 border border-vintage-accent/30">
+      <div class="flex items-center space-x-1 mb-4">
+       <i data-lucide="star" class="w-5 h-5 text-vintage-orange fill-current"></i>
+       <i data-lucide="star" class="w-5 h-5 text-vintage-orange fill-current"></i>
+       <i data-lucide="star" class="w-5 h-5 text-vintage-orange fill-current"></i>
+       <i data-lucide="star" class="w-5 h-5 text-vintage-orange fill-current"></i>
+       <i data-lucide="star" class="w-5 h-5 text-vintage-orange fill-current"></i>
+      </div>
+      <p class="text-gray-300 mb-6 italic">
+       "I run private guiding tours in Ethiopia for international clients. My agency website and customized trip advisory pipelines were built from scratch by Vintage Technologies. Both are working seamlessly, and booking numbers have increased dramatically! They are the absolute best."
+      </p>
+      <div class="flex items-center space-x-4">
+       <div class="w-12 h-12 bg-vintage-orange rounded-full flex items-center justify-center font-bold text-white">MM</div>
+       <div>
+        <h4 class="font-semibold text-white">Melkamu Melese</h4>
+        <p class="text-gray-400 text-sm">Founder &amp; Principal Guide, Melkam Tours</p>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </section>
+
+  <section id="contact" class="py-24 bg-vintage-light">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid lg:grid-cols-2 gap-16">
+     <div>
+      <span class="inline-block px-4 py-2 bg-vintage-accent/10 text-vintage-accent rounded-full text-sm font-semibold mb-6">Let's Collaborate</span>
+      <h2 class="text-4xl font-heading font-bold text-vintage-dark mb-6">Have an Idea? Let's Turn It Into Reality</h2>
+      <p class="text-lg text-vintage-gray mb-10 leading-relaxed">
+       Interested in working with us? Drop us a brief description of your project scope. Our structural analysis team will get back to you with a detailed breakdown.
+      </p>
+      
+      <div class="space-y-6">
+       <div class="flex items-center space-x-4">
+        <div class="w-12 h-12 bg-vintage-accent/10 rounded-lg flex items-center justify-center flex-shrink-0">
+         <i data-lucide="map-pin" class="w-6 h-6 text-vintage-accent"></i>
+        </div>
+        <div>
+         <h4 class="font-heading font-bold text-vintage-dark">Office Location</h4>
+         <p id="contact-address" class="text-vintage-gray">Meskel Flower, Sherifa Building, Addis Ababa, Ethiopia</p>
+        </div>
+       </div>
+       <div class="flex items-center space-x-4">
+        <div class="w-12 h-12 bg-vintage-accent/10 rounded-lg flex items-center justify-center flex-shrink-0">
+         <i data-lucide="phone" class="w-6 h-6 text-vintage-accent"></i>
+        </div>
+        <div>
+         <h4 class="font-heading font-bold text-vintage-dark">Business Line</h4>
+         <p id="contact-phone" class="text-vintage-gray">+251-916-77-23-03</p>
+        </div>
+       </div>
+       <div class="flex items-center space-x-4">
+        <div class="w-12 h-12 bg-vintage-accent/10 rounded-lg flex items-center justify-center flex-shrink-0">
+         <i data-lucide="mail" class="w-6 h-6 text-vintage-accent"></i>
+        </div>
+        <div>
+         <h4 class="font-heading font-bold text-vintage-dark">Email Inquiries</h4>
+         <p id="contact-email" class="text-vintage-gray">marketing@vintechplc.com</p>
+        </div>
+       </div>
+       <div class="flex items-center space-x-4">
+        <div class="w-12 h-12 bg-vintage-accent/10 rounded-lg flex items-center justify-center flex-shrink-0">
+         <i data-lucide="clock" class="w-6 h-6 text-vintage-accent"></i>
+        </div>
+        <div>
+         <h4 class="font-heading font-bold text-vintage-dark">Operation Hours</h4>
+         <p class="text-vintage-gray">Mon-Fri: 8:30 AM - 5:30 PM | Support: 16x7</p>
+        </div>
+       </div>
+      </div>
+     </div>
+
+     <div class="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
+      <form id="quote-form" class="space-y-6">
+       <div class="grid sm:grid-cols-2 gap-6">
+        <div>
+         <label class="block text-sm font-semibold text-vintage-dark mb-2">First Name</label>
+         <input type="text" class="w-full bg-vintage-light border border-gray-200 rounded-lg px-4 py-3 text-vintage-dark placeholder-gray-400 focus:outline-none focus:border-vintage-accent transition-colors" required>
+        </div>
+        <div>
+         <label class="block text-sm font-semibold text-vintage-dark mb-2">Last Name</label>
+         <input type="text" class="w-full bg-vintage-light border border-gray-200 rounded-lg px-4 py-3 text-vintage-dark placeholder-gray-400 focus:outline-none focus:border-vintage-accent transition-colors" required>
+        </div>
+       </div>
+       <div class="grid sm:grid-cols-2 gap-6">
+        <div>
+         <label class="block text-sm font-semibold text-vintage-dark mb-2">Email Address</label>
+         <input type="email" class="w-full bg-vintage-light border border-gray-200 rounded-lg px-4 py-3 text-vintage-dark placeholder-gray-400 focus:outline-none focus:border-vintage-accent transition-colors" required>
+        </div>
+        <div>
+         <label class="block text-sm font-semibold text-vintage-dark mb-2">Phone Number</label>
+         <input type="tel" class="w-full bg-vintage-light border border-gray-200 rounded-lg px-4 py-3 text-vintage-dark placeholder-gray-400 focus:outline-none focus:border-vintage-accent transition-colors" required>
+        </div>
+       </div>
+       <div>
+        <label class="block text-sm font-semibold text-vintage-dark mb-2">Scope of Interest</label>
+        <select class="w-full bg-vintage-light border border-gray-200 rounded-lg px-4 py-3 text-vintage-dark focus:outline-none focus:border-vintage-accent transition-colors">
+         <option>Enterprise Resource Planning (ERP)</option>
+         <option>Web and Mobile App Engineering</option>
+         <option>Systems Maintenance &amp; Technical Support</option>
+         <option>Corporate IT Consultancy</option>
+         <option>Other Custom Requirements</option>
+        </select>
+       </div>
+       <div>
+        <label class="block text-sm font-semibold text-vintage-dark mb-2">Project Brief</label>
+        <textarea rows="4" placeholder="Briefly describe your systems objectives..." class="w-full bg-vintage-light border border-gray-200 rounded-lg px-4 py-3 text-vintage-dark placeholder-gray-400 focus:outline-none focus:border-vintage-accent transition-colors" required></textarea>
+       </div>
+       <button type="submit" class="w-full bg-vintage-accent hover:bg-indigo-700 text-white font-semibold py-4 rounded-lg transition-all duration-300 hover:shadow-xl accent-glow flex items-center justify-center">
+        <i data-lucide="send" class="w-5 h-5 mr-2"></i> Send Inquiry 
+       </button>
+      </form>
+     </div>
+    </div>
+   </div>
+  </section>
+
+  <footer class="bg-vintage-dark text-white pt-20 pb-10 border-t border-vintage-blue">
+   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+     <div>
+      <div class="flex items-center space-x-3 mb-6">
+       <div class="w-10 h-10 bg-vintage-accent rounded-lg flex items-center justify-center">
+        <i data-lucide="code-2" class="w-6 h-6 text-white"></i>
+       </div>
+       <span id="footer-company-name" class="text-xl font-heading font-bold text-white">V.T</span>
+      </div>
+      <p class="text-gray-400 text-sm mb-6">
+       Top Rated Software Development Company in Ethiopia. Elevating performance and scaling operational flow.
+      </p>
+      <div class="flex space-x-4">
+       <a href="#" class="w-10 h-10 bg-white/5 rounded-lg flex items-center justify-center text-gray-400 hover:text-vintage-orange hover:bg-white/10 transition-all"><i data-lucide="facebook" class="w-5 h-5"></i></a>
+       <a href="#" class="w-10 h-10 bg-white/5 rounded-lg flex items-center justify-center text-gray-400 hover:text-vintage-orange hover:bg-white/10 transition-all"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+       <a href="#" class="w-10 h-10 bg-white/5 rounded-lg flex items-center justify-center text-gray-400 hover:text-vintage-orange hover:bg-white/10 transition-all"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+      </div>
+     </div>
+     
+     <div>
+      <h4 class="font-heading font-bold text-lg mb-6 uppercase tracking-wider">Quick Links</h4>
+      <ul class="space-y-3 text-sm text-gray-400">
+       <li><a href="#home" class="hover:text-vintage-orange transition-colors">Home</a></li>
+       <li><a href="#about" class="hover:text-vintage-orange transition-colors">About Us</a></li>
+       <li><a href="#services" class="hover:text-vintage-orange transition-colors">Digital Services</a></li>
+       <li><a href="#portfolio" class="hover:text-vintage-orange transition-colors">Our Portfolio</a></li>
+       <li><a href="#opportunities" class="hover:text-vintage-orange transition-colors">Careers &amp; Internships</a></li>
+      </ul>
+     </div>
+
+     <div>
+      <h4 class="font-heading font-bold text-lg mb-6 uppercase tracking-wider">Our Solutions</h4>
+      <ul class="space-y-3 text-sm text-gray-400">
+       <li><a href="#" class="hover:text-vintage-orange transition-colors">ERP Software Systems</a></li>
+       <li><a href="#" class="hover:text-vintage-orange transition-colors">EBS Transit Dispatch</a></li>
+       <li><a href="#" class="hover:text-vintage-orange transition-colors">NGO Automated Payroll</a></li>
+       <li><a href="#" class="hover:text-vintage-orange transition-colors">MIS &amp; Database Design</a></li>
+       <li><a href="#" class="hover:text-vintage-orange transition-colors">Mobile Products</a></li>
+      </ul>
+     </div>
+
+     <div>
+      <h4 class="font-heading font-bold text-lg mb-6 uppercase tracking-wider">Contact Info</h4>
+      <ul class="space-y-4 text-sm text-gray-400">
+       <li class="flex items-start space-x-3">
+        <i data-lucide="map-pin" class="w-5 h-5 text-vintage-orange flex-shrink-0 mt-0.5"></i>
+        <span>Meskel Flower, Sherifa Building, Addis Ababa, Ethiopia</span>
+       </li>
+       <li class="flex items-center space-x-3">
+        <i data-lucide="phone" class="w-5 h-5 text-vintage-orange flex-shrink-0"></i>
+        <span id="footer-phone">+251-916-77-23-03</span>
+       </li>
+       <li class="flex items-center space-x-3">
+        <i data-lucide="mail" class="w-5 h-5 text-vintage-orange flex-shrink-0"></i>
+        <span id="footer-email">marketing@vintechplc.com</span>
+       </li>
+      </ul>
+     </div>
+    </div>
+
+    <div class="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center">
+     <p class="text-gray-500 text-sm mb-4 md:mb-0">© 2026 Vintage Technologies PLC. All rights reserved.</p>
+     <div class="flex space-x-6 text-sm">
+      <a href="#" class="text-gray-500 hover:text-vintage-orange transition-colors">Privacy Policy</a> 
+      <a href="#" class="text-gray-500 hover:text-vintage-orange transition-colors">Terms of Service</a> 
+      <a href="#" class="text-gray-500 hover:text-vintage-orange transition-colors">Sitemap</a>
+     </div>
+    </div>
+   </div>
+  </footer>
+
+  <script>
+    // Configurable Default values matching original site.html behavior
+    const defaultConfig = {
+      company_name: 'V.T',
+      hero_headline: 'Transforming Ideas Into <span class="text-gradient">Digital Reality</span>',
+      hero_subtext: 'We deliver scalable, secure, and high-performance software. Elevate your brand with Ethiopia\'s leading collection of creative and collaborative minds.',
+      phone_number: '+251-935-65-96-25',
+      email_address: 'marketing@vintechplc.com',
+      company_address: 'Meskel Flower, Sherifa Building, Addis Ababa, Ethiopia'
+    };
+
+    // Keep active Element SDK dynamic loading 
+    if (window.ElementSDK) {
+      window.ElementSDK.setupConfig({
+        id: "v.t-software",
+        fields: new Map([
+          ['company_name', defaultConfig.company_name],
+          ['hero_headline', defaultConfig.hero_headline],
+          ['hero_subtext', defaultConfig.hero_subtext],
+          ['phone_number', defaultConfig.phone_number],
+          ['email_address', defaultConfig.email_address],
+          ['company_address', defaultConfig.company_address]
+        ])
+      });
+    }
+
+    // Lucide Icons Initialization
+    lucide.createIcons();
+
+    // Scroll Navbar logic
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add('nav-scrolled');
+      } else {
+        navbar.classList.remove('nav-scrolled');
+      }
+    });
+
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // Handle Forms
+    document.getElementById('quote-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Thank you for contacting V.T! Our business analysis team will email you shortly.');
+    });
+
+    document.getElementById('talent-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Congratulations! You have successfully submitted your credentials to the V.T Talent Pool.');
+    });
+  </script>
+
+ </body>
+</html>
