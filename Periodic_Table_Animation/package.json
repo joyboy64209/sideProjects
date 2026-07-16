@@ -1,0 +1,13 @@
+{
+  "name": "periodic-table-animation",
+  "version": "1.0.0",
+  "private": true,
+  "description": "3D Interactive Periodic Table with anime.js",
+  "scripts": {
+    "start": "npx serve .",
+    "dev": "npx serve ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT"
+}
