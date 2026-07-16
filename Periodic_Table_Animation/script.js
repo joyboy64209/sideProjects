@@ -174,25 +174,39 @@ const elementsLayout = createLayout($sceneContent, {
   ease: 'inOutExpo',
 });
 
-// Move the scene relative to the cursor position
+// Click-and-drag rotation (like the three.js periodic table example)
 const sceneAnimatable = createAnimatable('#scene', { rotateX: 200, rotateY: 200 });
-const pointer = { x: 0, y: 0, rotateX: 15, rotateY: 20, rx: 0, ry: 0 };
+const drag = { isDragging: false, prevX: 0, prevY: 0, rotX: 15, rotY: 20 };
 
-createTimer({
-  onUpdate: () => {
-    pointer.rx = utils.lerp(pointer.rx, pointer.rotateX, .01);
-    pointer.ry = utils.lerp(pointer.ry, pointer.rotateY, .01);
-    sceneAnimatable.rotateX(pointer.y * pointer.rx);
-    sceneAnimatable.rotateY(pointer.x * pointer.ry);
-  }
+document.addEventListener('mousedown', event => {
+  // Only start drag if clicking on the scene background or an element, not on controls
+  if (event.target.closest('.controls')) return;
+  drag.isDragging = true;
+  drag.prevX = event.clientX;
+  drag.prevY = event.clientY;
+});
+
+document.addEventListener('mousemove', event => {
+  if (!drag.isDragging) return;
+  const dx = event.clientX - drag.prevX;
+  const dy = event.clientY - drag.prevY;
+  drag.prevX = event.clientX;
+  drag.prevY = event.clientY;
+  drag.rotY += dx * 0.5;
+  drag.rotX += dy * 0.5;
+  drag.rotX = Math.min(Math.max(drag.rotX, -90), 90);
+  sceneAnimatable.rotateX(drag.rotX);
+  sceneAnimatable.rotateY(drag.rotY);
+});
+
+document.addEventListener('mouseup', () => {
+  drag.isDragging = false;
 });
 
 // The different layout tranform
 const transformLayout = {
   table: () => {
     // The table view use CSS grid and has no special tranforms except for a selected element
-    pointer.rotateX = 15;
-    pointer.rotateY = 20;
     cards.forEach($el => {
       $el.style.opacity = 1;
       $el.style.transform = $el.classList.contains('is-expanded') ? 'translateZ(50px)' : 'translateZ(10px)';
@@ -200,8 +214,6 @@ const transformLayout = {
   },
   sphere: () => {
     const radius = 300;
-    pointer.rotateX = 40;
-    pointer.rotateY = 360;
     cards.forEach(($el, i) => {
       const offsetZ = $el.classList.contains('is-expanded') ? 20 : 0;
       const phi = Math.acos(-1 + (2 * i) / cards.length);
@@ -216,8 +228,6 @@ const transformLayout = {
     });
   },
   helix: () => {
-    pointer.rotateX = 30;
-    pointer.rotateY = 300;
     const radius = 400;
     const thetaStep = 0.16;
     const verticalSpacing = 3;
@@ -234,8 +244,6 @@ const transformLayout = {
     });
   },
   grid: () => {
-    pointer.rotateX = 10;
-    pointer.rotateY = 60;
     const cols = 5;
     const rows = 5;
     const colGap = 150;
@@ -256,18 +264,9 @@ const transformLayout = {
   },
   random: () => {
     // The table view use CSS grid and has no special tranforms except for a selected element
-    pointer.rotateX = 15;
-    pointer.rotateY = 20;
     utils.set(cards, { x: () => utils.random(-500, 500), y: () => utils.random(-500, 500), z: () => utils.random(-500, 500)})
   },
 };
-
-document.addEventListener('pointermove', event => {
-  const hw = window.innerWidth * .5;
-  const hh = window.innerHeight * .5;
-  pointer.x = utils.mapRange(event.clientX - hw, -hw, hw, 1, -1);
-  pointer.y = utils.mapRange(event.clientY - hh, -hh, hh, -1, 1);
-});
 
 const toggles = utils.$('.controls button.toggle');
 
