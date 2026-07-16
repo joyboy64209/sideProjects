@@ -27,6 +27,9 @@ body {
   height: 100%;
   transform-style: preserve-3d;
   backface-visibility: hidden;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--fg-4) transparent;
 }
 #scene-content[data-layout="table"] {
   display: grid;

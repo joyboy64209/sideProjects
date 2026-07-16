@@ -1,4 +1,4 @@
-import { createLayout, utils, stagger, spring, createTimer, createAnimatable } from 'https://esm.sh/animejs@4.3.0';
+import { createLayout, utils, stagger, spring, createTimer, createAnimatable } from './animejs/anime.esm.js';
 
 // Elements data to populate the table
 
