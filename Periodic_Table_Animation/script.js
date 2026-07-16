@@ -185,8 +185,9 @@ function applyRotation() {
 }
 
 document.addEventListener('mousedown', event => {
-  // Only start drag if clicking on the scene background or an element, not on controls
+  // Only start drag when clicking on the scene background, not on controls or element cards
   if (event.target.closest('.controls')) return;
+  if (event.target.closest('.element')) return;
   drag.isDragging = true;
   drag.prevX = event.clientX;
   drag.prevY = event.clientY;
