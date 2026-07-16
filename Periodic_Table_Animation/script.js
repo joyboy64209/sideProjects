@@ -174,9 +174,15 @@ const elementsLayout = createLayout($sceneContent, {
   ease: 'inOutExpo',
 });
 
-// Click-and-drag rotation (like the three.js periodic table example)
+// Click-and-drag rotation (like the three.js periodic table example) with RAF throttling for smooth performance
 const sceneAnimatable = createAnimatable('#scene', { rotateX: 200, rotateY: 200 });
-const drag = { isDragging: false, prevX: 0, prevY: 0, rotX: 15, rotY: 20 };
+const drag = { isDragging: false, prevX: 0, prevY: 0, rotX: 15, rotY: 20, frameId: null };
+
+function applyRotation() {
+  drag.frameId = null;
+  sceneAnimatable.rotateX(drag.rotX);
+  sceneAnimatable.rotateY(drag.rotY);
+}
 
 document.addEventListener('mousedown', event => {
   // Only start drag if clicking on the scene background or an element, not on controls
@@ -195,12 +201,20 @@ document.addEventListener('mousemove', event => {
   drag.rotY += dx * 0.5;
   drag.rotX += dy * 0.5;
   drag.rotX = Math.min(Math.max(drag.rotX, -90), 90);
-  sceneAnimatable.rotateX(drag.rotX);
-  sceneAnimatable.rotateY(drag.rotY);
+  // Throttle with requestAnimationFrame — only update once per frame
+  if (!drag.frameId) {
+    drag.frameId = requestAnimationFrame(applyRotation);
+  }
 });
 
 document.addEventListener('mouseup', () => {
   drag.isDragging = false;
+  // Ensure final position is applied
+  if (drag.frameId) {
+    cancelAnimationFrame(drag.frameId);
+    drag.frameId = null;
+  }
+  applyRotation();
 });
 
 // The different layout tranform
