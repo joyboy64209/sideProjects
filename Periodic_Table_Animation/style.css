@@ -16,6 +16,7 @@ body {
   height: auto;
   padding: var(--padding);
   will-change: transform;
+  overflow: hidden;
 }
 #scene-content {
   pointer-events: none;
